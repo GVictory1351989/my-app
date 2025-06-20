@@ -1,0 +1,1215 @@
+ React का उद्देश्य (Goal)
+React का मुख्य उद्देश्य है: Web Page पर HTML को Dynamic रूप से Render करना।
+
+🧩 React कैसे HTML Render करता है?
+React दो मुख्य चीज़ों का उपयोग करता है:
+createRoot() Function
+render() Method
+🧱 createRoot() क्या करता है?
+यह एक HTML element को लेता है (जैसे कि <div id="root">)
+और React को बताता है कि React Component को कहाँ दिखाना है।
+🎬 render() क्या करता है?
+यह बताता है कि कौन सा React Component दिखाना है।
+📁 React कहाँ Render होता है?
+आपके React प्रोजेक्ट में एक public/index.html फाइल होती है।
+इस HTML फाइल में एक खाली <div id="root"></div> होता है।
+React इसी में अपना UI inject करता है।|
+
+JSX का पूरा नाम
+JSX का मतलब है: JavaScript XML
+🧾 JSX क्या करता है?
+JSX हमें React में HTML लिखने की सुविधा देता है।
+इससे हम JavaScript कोड के अंदर HTML जैसे दिखने वाले code लिख सकते हैं।
+JSX की मदद से React कोड साफ-सुथरा और पढ़ने में आसान बन जाता है।
+⚙️ JSX कैसे काम करता है?
+बिना JSX के हमें DOM में element डालने के लिए createElement() और appendChild() जैसे methods का use करना पड़ता है।
+लेकिन JSX के साथ हम सीधे HTML-like syntax लिख सकते हैं, जो React अपने आप React Elements में बदल देता है।
+
+Components come in two types, Class components and Function components, in this tutorial we will concentrate on Function components.
+A class component must include the extends React.Component statement. This statement creates an inheritance to React.Component, 
+and gives your component access to React.Component's functions.
+The component also requires a render() method, this method returns HTML.
+class Car extends React.Component {
+  render() {
+    return <h2>Hi, I am a Car!</h2>;
+  }
+}
+Function Component
+Here is the same example as above, but created using a Function component instead.
+A Function component also returns HTML, and behaves much the same way as a Class component,
+ but Function components can be written using much less code, are easier to understand, and will be preferred in this tutorial.
+ function Car() {
+  return <h2>Hi, I am a Car!</h2>;
+}
+
+Rendering a Component
+Now your React application has a component called Car, which returns an <h2> element.
+To use this component in your application, use similar syntax as normal HTML: <Car />
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<Car />);
+
+Props
+Components can be passed as props, which stands for properties.
+Props are like function arguments, and you send them into the component as attributes.
+You will learn more about props in the next chapter.
+function Car(props) {
+  return <h2>I am a {props.color} Car!</h2>;
+}
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<Car color="red"/>);
+Components in Components
+We can refer to components inside other components:
+Example
+Use the Car component inside the Garage component:
+function Car() {
+  return <h2>I am a Car!</h2>;
+}
+function Garage() {
+  return (
+    <>
+      <h1>Who lives in my Garage?</h1>
+      <Car />
+    </>
+  );
+}
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<Garage />);
+Components in Files
+React is all about re-using code, and it is recommended to split your components into separate files.
+To do that, create a new file with a .js file extension and put the code inside it:
+Note that the filename must start with an uppercase character.
+
+Example
+This is the new file, we named it "Car.js":
+
+function Car() {
+  return <h2>Hi, I am a Car!</h2>;
+}
+
+export default Car;
+
+To be able to use the Car component, you have to import the file in your application.
+
+Example
+Now we import the "Car.js" file in the application, and we can use the Car component as if it was created here.
+
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import Car from './Car.js';
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<Car />);
+
+ React Constructor – Short Note (Hindi, Copy-Paste Friendly)
+
+React में जब कोई Class Component बनता है, तो उसका constructor() method component के बनते ही सबसे पहले चलता है।
+
+इसमें हम component की initial state सेट करते हैं और super() कॉल करते हैं ताकि parent class (React.Component) की properties को access कर सकें।
+
+Example:
+
+javascript
+कॉपी करें
+बदलें
+class Car extends React.Component {
+  constructor() {
+    super();
+    this.state = { color: "red" };
+  }
+  render() {
+    return <h2>I am a {this.state.color} Car!</h2>;
+  }
+}
+🔹 constructor() → component की शुरुआत में चलता है
+🔹 this.state → component का internal data
+🔹 super() → parent class को initialize करता है
+
+React में props (properties) component को values भेजने का तरीका है, जो बिल्कुल function के arguments की तरह काम करते हैं। 
+इन्हें component में HTML attributes की तरह पास किया जाता है, जैसे <Car color="red" />। Props read-only होते हैं और component 
+के अंदर this.props.name की तरह access किए जाते हैं। अगर आप class component में constructor() यूज़ कर रहे हैं, तो उसमें props 
+को parameter के रूप में पास करना और super(props) कॉल करना जरूरी होता है ताकि parent class (React.Component) को props मिल सकें।
+ Props से components dynamic और reusable बनते हैं।
+ 
+ <Car color="red" />
+class Car extends React.Component {
+  render() {
+    return <h2>I am a {this.props.color} Car!</h2>;
+  }
+}
+
+class Car extends React.Component {
+  constructor(props) {
+    super(props); // props React.Component को भेजे जाते हैं
+  }
+  render() {
+    return <h2>I am a {this.props.model}!</h2>;
+  }
+}
+
+**📌 Components in Components – Short Note with Line-by-Line Example (Hindi, Copy-Paste Friendly)**
+
+### ✅ **Note:**
+
+React में आप एक component के अंदर दूसरा component **use** कर सकते हैं। इसे **component nesting** कहते हैं। इससे UI को छोटे-छोटे हिस्सों में बांटकर modular और reusable बनाया जा सकता है। Inner component को outer component के JSX में `<ComponentName />` के रूप में call किया जाता है।
+
+---
+
+### ✅ **Example:**
+
+```javascript
+// 👇 यह एक अलग component है
+class Car extends React.Component {
+  render() {
+    return <h2>I am a Car!</h2>; // यह output दिखाएगा
+  }
+}
+
+// 👇 यह दूसरा component है जो ऊपर वाले को यूज़ कर रहा है
+class Garage extends React.Component {
+  render() {
+    return (
+      <div>
+        <h1>Who lives in my Garage?</h1> // Static heading
+        <Car />  // 👈 यहाँ Car component को use किया गया है (nested component)
+      </div>
+    );
+  }
+}
+
+// 👇 यहां हम सिर्फ outer component Garage को render कर रहे हैं,
+// लेकिन उसके अंदर Car component अपने आप include हो जाता है
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<Garage />);
+```
+---
+
+### 🔁 **Line-by-Line Explanation:**
+
+* `Car` एक **child component** है जो सिर्फ `<h2>` return करता है।
+* `Garage` एक **parent component** है जो `<h1>` के साथ `<Car />` को call करता है।
+* `Garage` component को `render()` करने से अंदर का `Car` component भी render हो जाता है।
+
+📌 **इस तरह हम एक component के अंदर दूसरा component डाल सकते हैं और UI को modular बना सकते हैं।**
+**📘 Components in Files – हिंदी में सारांश (Short & Clear Meaning)**
+
+React में कोड को **reuse** करना बहुत ज़रूरी होता है। इसलिए React में हर component को एक **अलग file** में रखना **अच्छा practice** माना जाता है। इससे code **clean**, **modular** और **manageable** बनता है।
+
+---
+
+### 🔹 कैसे करें?
+
+* हर component के लिए एक **नई `.js` फाइल** बनाएं (जैसे `Car.js`)
+* उस फाइल की शुरुआत में `React` को import करें
+* अंत में उस component को **`export default`** करके बाहर भेजें, ताकि आप उसे दूसरी फाइलों में use कर सकें।
+---
+### ✅ Example (`Car.js` फाइल):
+```javascript
+import React from 'react';
+function Car() {
+  return <h2>I am a Car!</h2>;
+}
+export default Car;
+अब आप इस `Car` component को किसी भी दूसरी फाइल में import करके use कर सकते हैं:
+javascript
+import Car from './Car';
+📌 **सारांश:** React में components को अलग-अलग `.js` फाइलों में लिखना code को reusable और organized बनाता है।
+
+
+**📘 React Class Component State – हिंदी में सारांश (Short & Clear Meaning)**
+React के **Class Components** में एक **built-in `state` object** होता है, जो component की **internal values या data** को स्टोर करने के लिए use होता है।
+आपने पहले देखा होगा कि हमने `constructor()` में `this.state = {}` लिखा था — यही component की **initial state** सेट करने का तरीका है।
+### 🔹 `state` क्यों ज़रूरी है?
+* `state` एक ऐसा object है जिसमें वो values होती हैं जो component के अंदर ही use होती हैं।
+* जब ये `state` बदलती है (update होती है), तो React अपने आप उस component को **re-render** कर देता है, जिससे UI अपडेट हो जाता है।
+### ✅ Example:
+```javascript
+class Car extends React.Component {
+  constructor() {
+    super();
+    this.state = { brand: "Ford" }; // state defined
+  }
+
+  render() {
+    return <h2>I drive a {this.state.brand}!</h2>; // state used
+  }
+}
+📌 **सारांश:**
+`state` React class component की अपनी internal जानकारी (जैसे brand, count आदि) को रखता है। जब `state` बदलती है, component फिर से render होता है और नया UI दिखाता है।
+
+
+यहाँ पर **React Class Component State** और **Lifecycle Methods** का एक संक्षिप्त नोट और उदाहरण के साथ पूरा सारांश दिया गया है — हिंदी में:
+
+---
+
+## 🔹 React Class Component - State (स्थिति)
+
+* **state** एक JavaScript object है जो component की current स्थिति (data) को स्टोर करता है।
+* जब भी state में बदलाव होता है, component **re-render** होता है।
+
+### ✅ State Create करना
+
+```js
+class Car extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      brand: "Ford",
+      model: "Mustang",
+      color: "red",
+      year: 1964
+    };
+  }
+  render() {
+    return <h1>My {this.state.brand}</h1>;
+  }
+}
+```
+
+### ✅ State Update करना (setState)
+
+```js
+changeColor = () => {
+  this.setState({color: "blue"});
+}
+```
+
+---
+
+## 🔹 React Lifecycle Methods (जीवनचक्र विधियाँ)
+
+React components तीन phases से गुजरते हैं:
+
+1. **Mounting (स्थापना)**
+2. **Updating (अपडेटिंग)**
+3. **Unmounting (हटाना)**
+
+---
+
+### 🟢 1. Mounting Phase
+
+| Method                       | उपयोग                              |
+| ---------------------------- | ---------------------------------- |
+| `constructor()`              | initial state और props सेट करता है |
+| `getDerivedStateFromProps()` | props से state derive करता है      |
+| `render()`                   | UI रेंडर करता है (ज़रूरी method)   |
+| `componentDidMount()`        | DOM में render के बाद चलता है      |
+
+#### 🌟 Example:
+
+```js
+class Header extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {favoritecolor: "red"};
+  }
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({favoritecolor: "yellow"});
+    }, 1000);
+  }
+  render() {
+    return <h1>Color: {this.state.favoritecolor}</h1>;
+  }
+}
+```
+
+---
+
+### 🟠 2. Updating Phase
+
+| Method                       | उपयोग                                              |
+| ---------------------------- | -------------------------------------------------- |
+| `getDerivedStateFromProps()` | props से नए state derive करता है                   |
+| `shouldComponentUpdate()`    | rendering रोकने/जारी रखने का निर्णय लेता है        |
+| `render()`                   | re-render करता है                                  |
+| `getSnapshotBeforeUpdate()`  | update से पहले previous props/state access करता है |
+| `componentDidUpdate()`       | update के बाद चलता है                              |
+
+#### 🌟 Example with getSnapshotBeforeUpdate:
+
+```js
+getSnapshotBeforeUpdate(prevProps, prevState) {
+  document.getElementById("div1").innerHTML =
+    "Previous color: " + prevState.favoritecolor;
+}
+componentDidUpdate() {
+  document.getElementById("div2").innerHTML =
+    "Updated color: " + this.state.favoritecolor;
+}
+```
+
+---
+
+### 🔴 3. Unmounting Phase
+
+| Method                   | उपयोग                               |
+| ------------------------ | ----------------------------------- |
+| `componentWillUnmount()` | Component हटाए जाने से पहले चलता है |
+
+#### 🌟 Example:
+
+```js
+class Container extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {show: true};
+  }
+  delHeader = () => {
+    this.setState({show: false});
+  }
+  render() {
+    return (
+      <div>
+        {this.state.show && <Child />}
+        <button onClick={this.delHeader}>Delete Header</button>
+      </div>
+    );
+  }
+}
+
+class Child extends React.Component {
+  componentWillUnmount() {
+    alert("Header component हटाया जा रहा है");
+  }
+  render() {
+    return <h1>Hello World!</h1>;
+  }
+}
+```
+### ✅ React Props – Short Summary with Example (in Hindi + Code)
+
+---
+
+### 🔹 Props क्या हैं?
+
+* Props = **Properties**
+* ये arguments की तरह होते हैं, जो एक component को बाहर से भेजे जाते हैं।
+* Props को हम HTML attributes की तरह भेजते हैं।
+* Props **read-only** होते हैं (यानि इन्हें component के अंदर change नहीं कर सकते)।
+
+---
+
+### 🔹 Example 1 – Simple String Prop
+
+```jsx
+function Car(props) {
+  return <h2>I am a {props.brand}!</h2>;
+}
+
+function Garage() {
+  return (
+    <>
+      <h1>Garage में कौन है?</h1>
+      <Car brand="Ford" />
+    </>
+  );
+}
+```
+
+---
+
+### 🔹 Example 2 – Variable Prop
+
+```jsx
+function Garage() {
+  const carName = "Honda";
+  return <Car brand={carName} />;
+}
+```
+
+---
+
+### 🔹 Example 3 – Object Prop
+
+```jsx
+function Car(props) {
+  return <h2>I am a {props.brand.model}!</h2>;
+}
+
+function Garage() {
+  const carInfo = { name: "Ford", model: "Mustang" };
+  return <Car brand={carInfo} />;
+}
+```
+
+---
+
+### 🔒 Note:
+
+> Props को **modify नहीं किया जा सकता**, ये केवल read-only होते हैं।
+
+यहाँ React Events और Custom Events पर आधारित संक्षिप्त Hindi Notes दिए जा रहे हैं:
+
+---
+
+### 🟠 **React Events (इवेंट्स)**
+
+#### ✅ React Events क्या हैं?
+
+React में HTML की तरह user actions (जैसे click, change, mouseover) को handle करने के लिए events का इस्तेमाल होता है।
+
+#### ✅ Syntax:
+
+* **CamelCase**: `onClick`, `onChange` (HTML में `onclick`, `onchange`)
+* **JSX में Curly Braces**: `onClick={shoot}`
+
+#### ✅ Example:
+
+```jsx
+function Football() {
+  const shoot = () => {
+    alert("Great Shot!");
+  }
+
+  return <button onClick={shoot}>Take the shot!</button>;
+}
+```
+
+---
+
+### 🔵 **React Event में Argument पास करना**
+
+```jsx
+function Football() {
+  const shoot = (message) => {
+    alert(message);
+  }
+
+  return <button onClick={() => shoot("Goal!")}>Take the shot!</button>;
+}
+```
+
+---
+
+### 🟢 **React Synthetic Event (इवेंट ऑब्जेक्ट)**
+
+React में `event` एक synthetic event होता है जो native DOM events पर आधारित होता है।
+
+```jsx
+function Football() {
+  const shoot = (msg, event) => {
+    alert(event.type); // "click"
+  }
+
+  return <button onClick={(event) => shoot("Goal!", event)}>Take the shot!</button>;
+}
+```
+
+---
+
+### 🔴 **Custom Events in React (कस्टम इवेंट)**
+
+React DOM में सीधे कस्टम इवेंट नहीं होते जैसे native JS में होते हैं। लेकिन आप component-to-component communication के लिए props और callbacks का use करके custom behavior बना सकते हैं।
+
+#### ✅ Step by Step:
+
+1. **Parent Component से Callback भेजें**
+2. **Child Component उस callback को कॉल करे**
+
+#### 🔷 Example:
+
+```jsx
+function Child(props) {
+  return <button onClick={() => props.onKick("Ball kicked!")}>Kick</button>;
+}
+
+function Parent() {
+  const handleKick = (msg) => {
+    alert(msg);
+  }
+
+  return <Child onKick={handleKick} />;
+}
+---
+### ✨ Summary:
+
+| Point                  | Description                               |
+| ---------------------- | ----------------------------------------- |
+| `onClick={}`           | Event binding syntax                      |
+| Synthetic Event        | React का event object (`event.type` etc.) |
+| Arrow Function         | Arguments पास करने के लिए                 |
+| Custom Event via Props | Parent से callback भेजना                  |
+
+---
+
+अगर आपको किसी specific custom event की जरूरत हो जैसे form validation या notification trigger, 
+तो context API या third-party libraries (जैसे Redux, EventEmitter) का भी इस्तेमाल किया जा सकता है।
+
+बिलकुल सही! React में जब भी आपको किसी **list of items** को UI में दिखाना होता है, तो आप **JavaScript के `map()` method** का इस्तेमाल करते हैं।
+
+---
+
+### 🟢 **React में List Render करना**
+
+React में list को render करने के लिए हम `map()` method का उपयोग करते हैं क्योंकि:
+
+* यह एक नए array को return करता है।
+* यह हर item के लिए JSX element generate करता है।
+
+---
+
+### ✅ Basic Example:
+
+```jsx
+function CarList() {
+  const cars = ["Ford", "BMW", "Audi"];
+
+  return (
+    <ul>
+      {cars.map((car, index) => (
+        <li key={index}>{car}</li>
+      ))}
+    </ul>
+  );
+}
+```
+
+📝 **Explanation:**
+
+* `cars.map(...)` → यह हर car के लिए `<li>` element बनाएगा।
+* `key={index}` → React को हर item का unique पहचान देने के लिए।
+
+---
+
+### 🔴 Key Prop जरूरी क्यों है?
+
+* **`key` prop** React को बताता है कि कौन-सा item बदला, जोड़ा या हटाया गया।
+* बेहतर performance और कम bugs के लिए `key` हमेशा **unique और stable** होनी चाहिए। (`id` prefer किया जाता है)
+
+---
+
+### ✅ Object List का Example:
+
+```jsx
+function CarList() {
+  const cars = [
+    { id: 1, brand: "Ford" },
+    { id: 2, brand: "BMW" },
+    { id: 3, brand: "Audi" },
+  ];
+
+  return (
+    <ul>
+      {cars.map((car) => (
+        <li key={car.id}>{car.brand}</li>
+      ))}
+    </ul>
+  );
+}
+```
+
+---
+
+### 🟣 Short Summary (Hindi):
+
+| Term             | Description                                 |
+| ---------------- | ------------------------------------------- |
+| `map()`          | Array का loop जो JSX element return करता है |
+| `key`            | Unique पहचान React को देने के लिए           |
+| JSX inside `map` | List में हर element को render करने के लिए   |
+
+---
+///
+यहाँ पर **React Forms** का पूरा सारांश **संक्षिप्त रूप में हिंदी में** दिया गया है:
+
+---
+
+### ✅ **React में Forms क्या हैं?**
+
+React में फ़ॉर्म्स HTML जैसे ही होते हैं लेकिन इनका डेटा **component state** में store होता है और React द्वारा control किया जाता है।
+
+---
+
+### 1️⃣ **Basic Form Example (Without state)**
+
+```jsx
+function MyForm() {
+  return (
+    <form>
+      <label>नाम लिखिए:
+        <input type="text" />
+      </label>
+    </form>
+  );
+}
+```
+
+🔴 यह form submit होने पर page को refresh कर देगा।
+👉 इसलिए React में हम इसे control करते हैं।
+
+---
+
+### 2️⃣ **Controlled Form (With state & onChange)**
+
+```jsx
+const [name, setName] = useState("");
+
+<input
+  type="text"
+  value={name}
+  onChange={(e) => setName(e.target.value)}
+/>
+```
+
+🟢 यह input field अब React state से जुड़ा है। इसे **controlled component** कहते हैं।
+
+---
+
+### 3️⃣ **Form Submission Control**
+
+```jsx
+<form onSubmit={handleSubmit}>
+  ...
+</form>
+
+const handleSubmit = (event) => {
+  event.preventDefault(); // page reload रोकेगा
+  alert(`आपका नाम है: ${name}`);
+}
+```
+
+---
+
+### 4️⃣ **Multiple Input Fields Example**
+
+```jsx
+const [inputs, setInputs] = useState({});
+
+const handleChange = (e) => {
+  const { name, value } = e.target;
+  setInputs(values => ({ ...values, [name]: value }));
+}
+```
+
+🟡 सभी input fields एक ही handler से control होते हैं।
+📌 हर input में `name` attribute ज़रूरी है।
+
+---
+
+### 5️⃣ **Textarea in React**
+
+```jsx
+const [textarea, setTextarea] = useState("Initial text");
+
+<textarea value={textarea} onChange={(e) => setTextarea(e.target.value)} />
+```
+
+📌 HTML में content tag के बीच होता है,
+React में यह `value` से controlled होता है।
+
+---
+
+### 6️⃣ **Select Box in React**
+
+```jsx
+const [myCar, setMyCar] = useState("Volvo");
+
+<select value={myCar} onChange={(e) => setMyCar(e.target.value)}>
+  <option value="Ford">Ford</option>
+  <option value="Volvo">Volvo</option>
+  <option value="Fiat">Fiat</option>
+</select>
+```
+
+🟣 React में selected option `value` attribute से manage होता है,
+HTML में `selected` attribute से होता है।
+
+---
+
+### 🔚 **नोट्स सारांश**
+
+| Input Type      | React में कैसे Manage होता है           |
+| --------------- | --------------------------------------- |
+| Text Field      | `value` और `onChange` से                |
+| Textarea        | `value` और `onChange` से                |
+| Select Box      | `value` और `onChange` से                |
+| Form Submit     | `onSubmit` handler से control होता है   |
+| Multiple Fields | `name` और `useState({})` से manage करें |
+
+---
+### ✅ **React Router क्या है? (What is React Router in Hindi)**
+
+**React Router** एक **standard library** है जो React ऐप में **multiple pages** और **navigation (routing)** को handle करने के लिए इस्तेमाल की जाती है।
+
+---
+
+## 📌 **React Router क्यों ज़रूरी है?**
+
+React by default **Single Page Application (SPA)** होता है — यानी पूरा ऐप एक ही HTML page पर चलता है।
+
+🔹 अगर आप "Home", "About", "Contact" जैसी अलग-अलग pages बनाना चाहते हैं (जैसे वेबसाइट में होता है),
+🔹 और बिना पेज reload किए navigation करना चाहते हैं,
+🔹 तब आपको **React Router** की ज़रूरत होती है।
+
+---
+
+## 🧱 React Router Setup
+
+### 🔹 Step 1: Installation
+
+```bash
+npm install react-router-dom
+```
+
+या development dependency के तौर पर:
+
+```bash
+npm i -D react-router-dom
+```
+
+---
+
+### 🔹 Step 2: Folder Structure (src/pages)
+
+```
+src/
+├── pages/
+│   ├── Layout.js
+│   ├── Home.js
+│   ├── Blogs.js
+│   ├── Contact.js
+│   └── NoPage.js
+└── index.js
+```
+
+---
+
+### 🔹 Step 3: Routing Setup (`index.js`)
+
+```jsx
+import ReactDOM from "react-dom/client";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Layout from "./pages/Layout";
+import Home from "./pages/Home";
+import Blogs from "./pages/Blogs";
+import Contact from "./pages/Contact";
+import NoPage from "./pages/NoPage";
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="blogs" element={<Blogs />} />
+          <Route path="contact" element={<Contact />} />
+          <Route path="*" element={<NoPage />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App />);
+```
+
+---
+
+## 🔁 Page Components
+
+### 🔸 `Layout.js` (common nav + outlet)
+
+```jsx
+import { Outlet, Link } from "react-router-dom";
+
+const Layout = () => {
+  return (
+    <>
+      <nav>
+        <ul>
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/blogs">Blogs</Link></li>
+          <li><Link to="/contact">Contact</Link></li>
+        </ul>
+      </nav>
+      <Outlet /> {/* यहाँ बाकी pages render होंगे */}
+    </>
+  );
+};
+
+export default Layout;
+```
+
+---
+
+### 🔸 `Home.js`
+
+```jsx
+const Home = () => {
+  return <h1>Home</h1>;
+};
+export default Home;
+```
+
+---
+
+### 🔸 `Blogs.js`
+
+```jsx
+const Blogs = () => {
+  return <h1>Blog Articles</h1>;
+};
+export default Blogs;
+```
+
+---
+
+### 🔸 `Contact.js`
+
+```jsx
+const Contact = () => {
+  return <h1>Contact Me</h1>;
+};
+export default Contact;
+```
+
+---
+
+### 🔸 `NoPage.js` (404 Page)
+
+```jsx
+const NoPage = () => {
+  return <h1>404 - Page Not Found</h1>;
+};
+export default NoPage;
+```
+
+---
+
+## 🔎 Summary (सारांश)
+
+| Feature         | Description (विवरण)                                |
+| --------------- | -------------------------------------------------- |
+| `BrowserRouter` | App को routing के लिए तैयार करता है                |
+| `Routes`        | Multiple `<Route>` को wrap करता है                 |
+| `Route`         | URL path और Component को match करता है             |
+| `Layout`        | Common layout (जैसे navbar) देता है                |
+| `Outlet`        | Child component को render करता है                  |
+| `Link`          | `a href` का React version (बिना reload navigation) |
+| `path="*"`      | Fallback route (404 Page)                          |
+
+---
+
+### ✅ **React.memo क्या है? – Short Hindi Notes**
+
+#### 📌 **React.memo का उपयोग क्यों करते हैं?**
+
+`React.memo` एक **higher order component** है जो functional component को **unnecessary re-render** होने से बचाता है **अगर उसके props change नहीं हुए हों**।
+
+---
+
+### ⚠️ Problem:
+
+```jsx
+<Todos todos={todos} />
+```
+
+जब आप `count` को update करते हैं, तब भी `Todos` दोबारा render हो जाता है — जबकि `todos` की value change नहीं हुई।
+
+➡ इससे **performance issue** हो सकता है जब component complex हो।
+
+---
+
+### ✅ Solution: `React.memo`
+
+```jsx
+import { memo } from "react";
+
+const Todos = ({ todos }) => {
+  console.log("child render"); // Debug check
+  return (
+    <>
+      <h2>My Todos</h2>
+      {todos.map((todo, index) => (
+        <p key={index}>{todo}</p>
+      ))}
+    </>
+  );
+};
+
+export default memo(Todos); // 👈 Wrapped in memo
+```
+
+➡ अब `Todos` component **सिर्फ तब re-render होगा जब todos props बदलेंगे।**
+
+---
+
+### 🎯 Summary Table:
+
+| Feature        | Description                                 |
+| -------------- | ------------------------------------------- |
+| `React.memo()` | Functional component को wrap करता है        |
+| Purpose        | Props ना बदले हों तो re-render रोके         |
+| Benefit        | Performance optimization                    |
+| Use-case       | Heavy या बार-बार render होने वाले component |
+
+---
+
+यह रहा एक **Best Short Note** जो `useState` और `useEffect` दोनों को एक साथ **आसान हिंदी में** समझाता है — साथ में example भी है👇
+
+---
+
+## ✅ **React Hooks – useState और useEffect (Short Hindi Notes)**
+
+### 🔷 **1. useState क्या है?**
+
+`useState()` एक React Hook है जो component में **state** (मतलब data) को handle करने के लिए काम आता है।
+
+📦 Syntax:
+
+```js
+const [value, setValue] = useState(initialValue);
+```
+
+---
+
+### 🔷 **2. useEffect क्या है?**
+
+`useEffect()` एक Hook है जो component के **render होने के बाद** कुछ काम (जैसे API कॉल, console log, timer वगैरह) करने के लिए होता है।
+
+📦 Syntax:
+
+```js
+useEffect(() => {
+  // काम (side effect)
+}, [dependency]);
+```
+
+---
+
+### ✅ **Rules of Hooks:**
+
+* सिर्फ React function components में ही इस्तेमाल करें।
+* component के **top level पर ही call करें**, किसी condition या loop के अंदर नहीं।
+* हर बार जब dependency change होती है, useEffect चलता है।
+
+---
+
+### 🔀 **Example (useState + useEffect साथ में):**
+
+```jsx
+import React, { useState, useEffect } from "react";
+
+function App() {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    console.log(`आपने ${count} बार क्लिक किया`);
+  }, [count]); // count बदलने पर चलेगा
+
+  return (
+    <>
+      <h1>Count: {count}</h1>
+      <button onClick={() => setCount(count + 1)}>बढ़ाओ</button>
+    </>
+  );
+}
+
+export default App;
+```
+
+---
+
+### 🔍 **इसमें क्या हो रहा है:**
+
+* `count` नाम की state बनाई गई।
+* हर बार जब user बटन क्लिक करता है → count बढ़ता है।
+* `useEffect()` हर बार count के बदलने पर console में message दिखाता है।
+
+---
+
+### 📌 **useEffect के 3 Use Cases:**
+
+| Syntax                            | कब चलेगा                      | काम                   |
+| --------------------------------- | ----------------------------- | --------------------- |
+| `useEffect(() => {...}, [])`      | सिर्फ एक बार (initial render) | जैसे: API कॉल         |
+| `useEffect(() => {...})`          | हर render पर                  | जैसे: बिना dependency |
+| `useEffect(() => {...}, [count])` | सिर्फ जब `count` बदलता है     | जैसे: counter log     |
+
+---
+
+यहाँ पर React के कुछ Advanced Hooks को **Short, Easy aur Hindi में** समझाया गया है — साथ में आसान उदाहरण (examples) भी दिए गए हैं।
+
+---
+
+## ✅ **1. `useContext` – Global Data (Context API) के लिए**
+
+### 🔷 क्या करता है?
+
+Component tree में data को **props drilling के बिना** पास करने के लिए use होता है।
+
+### 🧠 आसान भाषा:
+
+Agar aapko ek data ko top-level से deeply nested components तक भेजना है, तो `useContext` best है।
+
+### 📦 Example:
+
+```jsx
+import React, { useContext, createContext } from 'react';
+
+const MyContext = createContext();
+
+function Child() {
+  const value = useContext(MyContext);
+  return <h1>Value: {value}</h1>;
+}
+
+function App() {
+  return (
+    <MyContext.Provider value="Namaste">
+      <Child />
+    </MyContext.Provider>
+  );
+}
+```
+
+---
+
+## ✅ **2. `useRef` – DOM access aur Non-re-render value**
+
+### 🔷 क्या करता है?
+
+* DOM को direct access करने के लिए
+* ऐसी value रखने के लिए जो re-render पर नहीं बदले
+
+### 📦 Example:
+
+```jsx
+import React, { useRef } from 'react';
+
+function App() {
+  const inputRef = useRef();
+
+  const focusInput = () => {
+    inputRef.current.focus();
+  };
+
+  return (
+    <>
+      <input ref={inputRef} type="text" />
+      <button onClick={focusInput}>Focus</button>
+    </>
+  );
+}
+```
+
+---
+
+## ✅ **3. `useCallback` – Function Memoization (बचाव re-creation से)**
+
+### 🔷 क्या करता है?
+
+हर render पर नई function बनाने से बचाता है। Performance optimization के लिए।
+
+### 📦 Example:
+
+```jsx
+import React, { useState, useCallback } from 'react';
+
+function App() {
+  const [count, setCount] = useState(0);
+
+  const log = useCallback(() => {
+    console.log("Clicked!");
+  }, []);
+
+  return (
+    <>
+      <button onClick={() => setCount(count + 1)}>+</button>
+      <Child log={log} />
+    </>
+  );
+}
+
+function Child({ log }) {
+  console.log("Child Render");
+  return <button onClick={log}>Click me</button>;
+}
+```
+
+---
+
+## ✅ **4. `useMemo` – Value Memoization (Slow calculation को बचाए)**
+
+### 🔷 क्या करता है?
+
+महंगे calculation को दोबारा ना करने के लिए memory में store करता है।
+
+### 📦 Example:
+
+```jsx
+import React, { useState, useMemo } from 'react';
+
+function App() {
+  const [count, setCount] = useState(0);
+
+  const expensiveCalc = useMemo(() => {
+    console.log("Calculating...");
+    return count * 10;
+  }, [count]);
+
+  return (
+    <>
+      <h1>{expensiveCalc}</h1>
+      <button onClick={() => setCount(count + 1)}>+</button>
+    </>
+  );
+}
+```
+
+---
+
+## ✅ **5. Custom Hooks – अपना Hook बनाएं**
+
+### 🔷 क्या करता है?
+
+अगर कोई logic repeat हो रहा है, तो उसे एक custom reusable hook में डाल सकते हैं।
+
+### 📦 Example:
+
+🔹 Custom Hook:
+
+```jsx
+import { useState, useEffect } from 'react';
+
+function useWindowWidth() {
+  const [width, setWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => setWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  return width;
+}
+```
+
+🔹 इस्तेमाल:
+
+```jsx
+function App() {
+  const width = useWindowWidth();
+  return <h1>Window width: {width}</h1>;
+}
+```
+
+---
+
+## 🔚 Final Summary Table:
+
+| Hook          | Use / फायदा               | Example Use Case                |
+| ------------- | ------------------------- | ------------------------------- |
+| `useContext`  | Global data access        | Theme, Auth                     |
+| `useRef`      | DOM access / no re-render | Input focus, Timer ID           |
+| `useCallback` | Memoize function          | Avoid unnecessary child renders |
+| `useMemo`     | Memoize calculation       | Expensive formula               |
+| Custom Hook   | Reusable logic            | Window size, Form validation    |
+
+---
+
+
+
