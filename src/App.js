@@ -6,6 +6,14 @@ function App() {
             name: "Tutorial 1",
             path: "/Tutorials/Tutorial1/index.html", // ✅ CORRECT path now
         },
+        {
+            name: "Tutorial 2",
+            path: "/Tutorials/Tutorial2/index.html", // ✅ CORRECT path now
+        },
+        {
+            name: "Tutorial 3",
+            path: "/Tutorials/Tutorial3/index.html", // ✅ CORRECT path now
+        },
     ];
 
     return (
