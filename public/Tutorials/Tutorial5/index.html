@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>📘 JavaScript Functions Tutorial</title>
+    <style>
+        body {
+            font-family: Arial;
+            padding: 20px;
+        }
+
+        button {
+            margin: 5px;
+            padding: 10px 15px;
+            border: 1px solid #ccc;
+            background-color: #f8f8f8;
+            cursor: pointer;
+        }
+
+            button:hover {
+                background-color: #eee;
+            }
+
+        #output {
+            margin-top: 20px;
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+            white-space: pre-line;
+        }
+    </style>
+</head>
+<body>
+    <h2>📘 JavaScript Day 7: Functions Tutorial</h2>
+
+    <button onclick="functionWithoutParams()">Function Declaration</button>
+    <button onclick="functionReturningValue()">Function Returning Value</button>
+    <button onclick="functionWithParam('Manish')">Function with Parameter</button>
+    <button onclick="functionWithTwoParams(5, 7)">Function with Two Parameters</button>
+    <button onclick="functionManyParams(1,2,3,4,5)">Function with Many Parameters</button>
+    <button onclick="functionUnlimitedArgs(1,2,3,4)">Unlimited Parameters (Regular)</button>
+    <button onclick="arrowUnlimitedArgs(10,20,30)">Unlimited Parameters (Arrow)</button>
+    <button onclick="anonymousExample()">Anonymous Function</button>
+    <button onclick="expressionExample()">Expression Function</button>
+    <button onclick="invokeImmediately()">Self Invoking Function</button>
+    <button onclick="arrowFunctionExample()">Arrow Function</button>
+    <button onclick="defaultParams()">Function with Default Parameters</button>
+    <button onclick="compareFunctions()">Function vs Arrow</button>
+
+    <div id="output"></div>
+
+    <script src="./tutorial5.js"></script>
+</body>
+</html>

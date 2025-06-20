@@ -14,6 +14,14 @@ function App() {
             name: "Tutorial 3",
             path: "/Tutorials/Tutorial3/index.html", // ✅ CORRECT path now
         },
+        {
+            name: "Tutorial 4",
+            path: "/Tutorials/Tutorial4/index.html", // ✅ CORRECT path now
+        },
+        {
+            name: "Tutorial 5",
+            path: "/Tutorials/Tutorial5/index.html", // ✅ CORRECT path now
+        }
     ];
 
     return (
