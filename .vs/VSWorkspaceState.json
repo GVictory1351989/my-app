@@ -3,9 +3,13 @@
     "",
     "\\public",
     "\\public\\Tutorials",
+    "\\public\\Tutorials\\Tutorial1",
+    "\\public\\Tutorials\\Tutorial2",
     "\\src",
-    "\\src\\pages"
+    "\\src\\reacttutorials",
+    "\\src\\reacttutorials\\component-types",
+    "\\src\\reacttutorials\\intro"
   ],
-  "SelectedNode": "\\src\\App.js",
+  "SelectedNode": "\\src\\reacttutorials\\component-types\\ReactComponentTypes.js",
   "PreviewInSolutionExplorer": false
 }
