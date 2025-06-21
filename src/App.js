@@ -1,42 +1,22 @@
-﻿import React from 'react';
+﻿import { Routes, Route, Link } from 'react-router-dom';
+import ReactIntro from './reacttutorials/intro/ReactIntro';
+import ReactComponentTypes from './reacttutorials/component-types/ReactComponentTypes';
 
 function App() {
     const tutorials = [
-        {
-            name: "Tutorial 1",
-            path: "/Tutorials/Tutorial1/index.html", // ✅ CORRECT path now
-        },
-        {
-            name: "Tutorial 2",
-            path: "/Tutorials/Tutorial2/index.html", // ✅ CORRECT path now
-        },
-        {
-            name: "JavaScript Date ",
-            path: "/Tutorials/Tutorial3/index.html", // ✅ CORRECT path now
-        },
-        {
-            name: "JavaScript Array",
-            path: "/Tutorials/Tutorial4/index.html", // ✅ CORRECT path now
-        },
-        {
-            name: "JavaScript Functions",
-            path: "/Tutorials/Tutorial5/index.html", // ✅ CORRECT path now
-        },
-        {
-            name: "JavaScript Object",
-            path: "/Tutorials/Tutorial6/index.html", // ✅ CORRECT path now
-        },
-        {
-            name: "Higher Order Functions",
-            path: "/Tutorials/Tutorial7/index.html", // ✅ CORRECT path now
-        },
-        
+        { name: "JavaScript Variable", path: "/Tutorials/Tutorial2/index.html" },
+        { name: "JavaScript Date", path: "/Tutorials/Tutorial3/index.html" },
+        { name: "JavaScript Array", path: "/Tutorials/Tutorial4/index.html" },
+        { name: "JavaScript Functions", path: "/Tutorials/Tutorial5/index.html" },
+        { name: "JavaScript Object", path: "/Tutorials/Tutorial6/index.html" },
+        { name: "Higher Order Functions", path: "/Tutorials/Tutorial7/index.html" },
     ];
 
-    return (
-        <div className="p-4">
-            <h2 className="text-2xl font-bold mb-4">Manish Kumar</h2>
-            <ul className="space-y-2">
+    // ✅ Main Tutorial Page
+    const Home = () => (
+        <div>
+            <h2 className="text-2xl font-bold mb-4">JavaScript and React Tutorials</h2>
+            <ul className="space-y-2 mb-6">
                 {tutorials.map((tut, index) => (
                     <li key={index}>
                         <a
@@ -49,7 +29,32 @@ function App() {
                         </a>
                     </li>
                 ))}
+
+                {/* ✅ React tutorial links */}
+                <li>
+                    <Link to="/reacttutorials/intro" className="text-green-600 hover:underline">
+                        React Introduction (Component based)
+                    </Link>
+                </li>
+                <li>
+                    <Link to="/reacttutorials/component-types" className="text-green-600 hover:underline">
+                        React Component Types (Class & Functional)
+                    </Link>
+                </li>
             </ul>
+        </div>
+    );
+
+    return (
+        <div className="p-4">
+            <Routes>
+                {/* Main tutorial list page */}
+                <Route path="/" element={<Home />} />
+
+                {/* ✅ Unique paths for each React component */}
+                <Route path="/reacttutorials/intro" element={<ReactIntro />} />
+                <Route path="/reacttutorials/component-types" element={<ReactComponentTypes />} />
+            </Routes>
         </div>
     );
 }
