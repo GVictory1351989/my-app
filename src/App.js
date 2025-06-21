@@ -1,6 +1,7 @@
 ﻿import { Routes, Route, Link } from 'react-router-dom';
 import ReactIntro from './reacttutorials/intro/ReactIntro';
 import ReactComponentTypes from './reacttutorials/component-types/ReactComponentTypes';
+import FunctionSetValue from './reacttutorials/functionset/FunctionSetValue';
 
 function App() {
     const tutorials = [
@@ -32,13 +33,18 @@ function App() {
 
                 {/* ✅ React tutorial links */}
                 <li>
-                    <Link to="/reacttutorials/intro" className="text-green-600 hover:underline">
+                    <Link to="/reacttutorials/ReactIntro" className="text-green-600 hover:underline">
                         React Introduction (Component based)
                     </Link>
                 </li>
                 <li>
-                    <Link to="/reacttutorials/component-types" className="text-green-600 hover:underline">
+                    <Link to="/reacttutorials/ReactComponentTypes" className="text-green-600 hover:underline">
                         React Component Types (Class & Functional)
+                    </Link>
+                </li>
+                <li>
+                    <Link to="/reacttutorials/FunctionSetValue" className="text-green-600 hover:underline">
+                        Function and Class Set Value and Initialise
                     </Link>
                 </li>
             </ul>
@@ -52,8 +58,9 @@ function App() {
                 <Route path="/" element={<Home />} />
 
                 {/* ✅ Unique paths for each React component */}
-                <Route path="/reacttutorials/intro" element={<ReactIntro />} />
-                <Route path="/reacttutorials/component-types" element={<ReactComponentTypes />} />
+                <Route path="/reacttutorials/ReactIntro" element={<ReactIntro />} />
+                <Route path="/reacttutorials/ReactComponentTypes" element={<ReactComponentTypes />} />
+                <Route path="/reacttutorials/FunctionSetValue" element={<FunctionSetValue />} />
             </Routes>
         </div>
     );
