@@ -1,0 +1,404 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Higher Order Functions</title>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f9f9f9;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            padding: 10px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 8px rgba(0,0,0,0.05);
+        }
+
+        h2 {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            color: #222;
+        }
+
+        p {
+            line-height: 1.6;
+        }
+
+        pre {
+            background: #f4f6f8;
+            padding: 15px;
+            overflow-x: auto;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        code {
+            font-family: Consolas, monospace;
+            font-size: 14px;
+            white-space: pre;
+            color: #111;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 12px;
+            background-color: #e0e0e0;
+            border: none;
+            padding: 4px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+            .copy-btn:hover {
+                background-color: #ccc;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Callback</h2>
+        <p>A callback is a function which can be passed as parameter to other function. See the example below.</p>
+        <pre>
+        <code>
+                 // a callback function, the name of the function could be any name
+                 const callback = (n) => {
+                 return n ** 2
+                 }
+
+                 // function that takes other function as a callback
+                 function cube(callback, n) {
+                 return callback(n) * n
+                 }
+
+                 console.log(cube(callback, 3))
+             </code>
+        <button onclick="showOutput()">Show Output</button>
+        <label id="callbacklog"></label>
+         </pre>
+
+        <h2>
+            Returning function
+        </h2>
+        <p>
+            Higher order functions return function as a value
+        </p>
+        <pre>
+        <code>
+                 // Higher order function returning an other function
+                 const higherOrder = n => 
+                 {
+                   const doSomething = m => 
+                     {
+                         const doWhatEver = t => 
+                             {
+                             return 2 * n + 3 * m + t
+                             }
+                         return doWhatEver
+                     }
+                   return doSomething
+                 }
+                 console.log(higherOrder(2)(3)(10))
+             </code>
+        <button onclick="higheroutput()">Show Output</button>
+        <label id="higheroutputlog"></label>
+         </pre>
+        <p>Let us see were we use call back functions. For instance the forEach method uses call back.</p>
+        <pre>
+        <code>
+                 const numbers = [1, 2, 3, 4, 5]
+                 const sumArray = arr => {
+                 let sum = 0
+                 const callback = function(element) {
+                 sum += element
+                 }
+                 // Other Options below
+                 //arr.forEach(function (element) {
+                 //    sum += element;
+                 //});
+                 //arr.forEach((element) => {
+                 //    sum += element;
+                 //});
+
+                 arr.forEach(callback)
+                 return sum
+
+                 }
+                 console.log(sumArray(numbers))
+
+
+             </code>
+        <button onclick="highordercallbackoutput()">Show Output</button>
+        <label id="higheroutputlog2"></label>
+         </pre>
+        <h2>Setting Time</h2>
+        <p>In JavaScript we can execute some activities in a certain interval of time or we can schedule(wait) for some time to execute some activities.</p>
+        <ul>
+            <li>setInterval</li>
+            <li>setTimeout</li>
+        </ul>
+        <h3>Setting Interval using a setInterval function</h3>
+        <p>
+            In JavaScript, we use setInterval higher order function to do some activity
+            continuously with in some interval of time. The setInterval global method take
+            a callback function and a duration as a parameter. The duration is in milliseconds
+            and the callback will be always called in that interval of time.
+        </p>
+        <pre>
+        <code>
+                 // syntax
+                 function callback() {
+                 // code goes here
+                 }
+                 setInterval(callback, duration)
+             </code>
+        <button onclick="setinterval()">Test SetInterval</button>
+        <label id="setintervallog"></label>
+         </pre>
+
+        <h2>Functional Programming</h2>
+        <p>
+            Instead of writing regular loop, latest version of JavaScript introduced lots of built in methods
+            which can help us to solve complicated problems. All builtin methods take callback function. In this section, we will see
+            forEach, map, filter, reduce, find, every, some, and sort.
+        </p>
+        <pre>
+        <code>
+                 arr.forEach(function (element, index, arr) {
+                 console.log(index, element, arr)
+                 })
+                 // The above code can be written using arrow function
+                 arr.forEach((element, index, arr) => {
+                 console.log(index, element, arr)
+                 })
+                 // The above code can be written using arrow function and explicit return
+                 arr.forEach((element, index, arr) => console.log(index, element, arr))
+
+                 ///
+                 const countries = ['Finland', 'Denmark', 'Sweden', 'Norway', 'Iceland']
+                 countries.forEach((element) => console.log(element.toUpperCase()))
+
+                 //
+                 let sum = 0;
+                 const numbers = [1, 2, 3, 4, 5];
+                 numbers.forEach(num => sum += num)
+
+                 console.log(sum)
+             </code>
+         </pre>
+
+        <h2>map</h2>
+        <p>
+            map: Iterate an array elements and modify the array elements.
+            It takes a callback function with elements, index , array parameter
+            and return a new array.
+        </p>
+        <pre>
+        <code>
+                 const modifiedArray = arr.map(function (element, index, arr) {
+                 return element
+                 })
+
+                 /*Arrow function and explicit return
+                 const modifiedArray = arr.map((element,index) => element);
+                 */
+                 //Example
+                 const numbers = [1, 2, 3, 4, 5]
+                 const numbersSquare = numbers.map((num) => num * num)
+
+                 console.log(numbersSquare) //[1, 4, 9, 16, 25]
+
+                 const names = ['Asabeneh', 'Mathias', 'Elias', 'Brook']
+                 const namesToUpperCase = names.map((name) => name.toUpperCase())
+                 console.log(namesToUpperCase) //['ASABENEH', 'MATHIAS', 'ELIAS', 'BROOK']
+
+             </code>
+        </pre>
+        <h2>filter</h2>
+        <p>Filter: Filter out items which full fill filtering conditions and return a new array.</p>
+        <pre>
+        <code>
+                 const countries = ['Albania',
+                 'Bolivia',
+                 'Canada',
+                 'Denmark',
+                 'Ethiopia',
+                 'Finland',
+                 'Germany',
+                 'Hungary',
+                 'Ireland',
+                 'Japan',
+                 'Kenya',]
+                 //Filter countries containing land
+                 const countriesContainingLand = countries.filter((country) =>
+                 country.includes('land')
+                 )
+                 console.log(countriesContainingLand)
+             </code>
+        <button onclick="filterexample()">Filter Example</button>
+        <label id="filterlog"></label>
+         </pre>
+        <h2>reduce</h2>
+        <p>
+            Reduce एक JavaScript array method है जो array ke saare elements ko mila kar एक hi value banata hai.
+            Iska matlab hai:
+            “पूरे array ko घटा-घटाकर (combine करके) एक single output banana”
+        </p>
+        <pre>
+        <code>
+                 array.reduce((accumulator, currentValue) => {
+                 return updatedAccumulator;
+                 }, initialValue);
+             </code>
+         </pre>
+
+        <h2>
+            every
+        </h2>
+        <p>
+            every: Check if all the elements are similar in one aspect. It returns boolean
+        </p>
+        <pre>
+        <code>
+                const names = ['Asabeneh', 'Mathias', 'Elias', 'Brook']
+                const areAllStr = names.every((name) => typeof name === 'string') // Are all strings?
+                console.log(areAllStr)
+            </code>
+         </pre>
+
+        <h2>find</h2>
+        <p>find: Return the first element which satisfies the condition</p>
+
+        <pre>
+        <code>
+                const ages = [24, 22, 25, 32, 35, 18]
+                const age = ages.find((age) => age < 20)
+                console.log(age)  //18
+
+                const names = ['Asabeneh', 'Mathias', 'Elias', 'Brook']
+                const result = names.find((name) => name.length > 7)
+                console.log(result) // Asabeneh
+
+                const scores = [
+                { name: 'Asabeneh', score: 95 },
+                { name: 'Mathias', score: 80 },
+                { name: 'Elias', score: 50 },
+                { name: 'Martha', score: 85 },
+                { name: 'John', score: 100 },
+                ]
+
+                const score = scores.find((user) => user.score > 80)
+                console.log(score)//{ name: "Asabeneh", score: 95 }
+
+            </code>
+         </pre>
+        <h2>findIndex</h2>
+        <p>findIndex: Return the position of the first element which satisfies the condition</p>
+        <pre>
+        <code>
+                const names = ['Asabeneh', 'Mathias', 'Elias', 'Brook']
+                const ages = [24, 22, 25, 32, 35, 18]
+
+                const result = names.findIndex((name) => name.length > 7)
+                console.log(result) // 0
+
+                const age = ages.findIndex((age) => age < 20)
+                console.log(age) // 5
+
+            </code>
+         </pre>
+
+
+        <h2>some</h2>
+        <p>some: Check if some of the elements are similar in one aspect. It returns boolean</p>
+        <pre>
+        <code>
+                const names = ['Asabeneh', 'Mathias', 'Elias', 'Brook']
+                const bools = [true, true, true, true]
+
+                const areSomeTrue = bools.some((b) =>  b === true)
+
+                console.log(areSomeTrue) //true
+                const areAllStr = names.some((name) => typeof name === 'number') // Are all strings ?
+                console.log(areAllStr) // false
+            </code>
+         </pre>
+
+
+        <h2>sort</h2>
+        <p>
+            sort: The sort methods arranges the array elements either ascending or
+            descending order. By default, the sort() method sorts values as strings
+            .This works well for string array items but not for numbers. 
+            If number values are sorted as strings and it give us wrong result.
+            Sort method modify the original array. It is recommended to copy the 
+            original data before you start using sort method.
+        </p>
+        <pre>
+            <code>
+                //Sorting string values
+                const products = ['Milk', 'Coffee', 'Sugar', 'Honey', 'Apple', 'Carrot']
+                console.log(products.sort()) // ['Apple', 'Carrot', 'Coffee', 'Honey', 'Milk', 'Sugar']
+                //Now the original products array  is also sorted
+
+
+                //Sorting Numeric values
+
+                const numbers = [9.81, 3.14, 100, 37]
+                // Using sort method to sort number items provide a wrong result. see below
+                console.log(numbers.sort()) //[100, 3.14, 37, 9.81]
+                numbers.sort(function (a, b) {
+                return a - b
+                })
+
+                console.log(numbers) // [3.14, 9.81, 37, 100]
+
+                numbers.sort(function (a, b) {
+                return b - a
+                })
+                console.log(numbers) //[100, 37, 9.81, 3.14]
+
+                //Sorting Object Arrays
+                objArr.sort(function (a, b) {
+                if (a.key < b.key) return -1
+                if (a.key > b.key) return 1
+                return 0
+                })
+
+                // or
+
+                objArr.sort(function (a, b) {
+                if (a['key'] < b['key']) return -1
+                if (a['key'] > b['key']) return 1
+                return 0
+                })
+
+                const users = [
+                { name: 'Asabeneh', age: 150 },
+                { name: 'Brook', age: 50 },
+                { name: 'Eyob', age: 100 },
+                { name: 'Elias', age: 22 },
+                ]
+                users.sort((a, b) => {
+                if (a.age < b.age) return -1
+                if (a.age > b.age) return 1
+                return 0
+                })
+                console.log(users) // sorted ascending
+                // [{…}, {…}, {…}, {…}]
+            </code>
+         </pre>
+
+    </div>
+    <script src="./tutorial7.js"></script>
+</body>
+</html>

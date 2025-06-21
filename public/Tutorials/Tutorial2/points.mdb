@@ -37,3 +37,117 @@ Arrays
 ```js
 '  Hello  '.trim()   // 'Hello'
 ```
+
+## 🟩 6. `includes(substring)`
+
+🔹 Substring मौजूद है या नहीं – `true/false`
+
+```js
+'JavaScript'.includes('Script')  // true
+```
+
+---
+
+## 🟩 7. `replace(old, new)`
+
+🔹 Substring को नए से replace करता है।
+
+```js
+'JS is bad'.replace('bad','good') // JS is good
+```
+
+---
+
+## 🟩 8. `charAt(index)` / `charCodeAt(index)`
+
+🔹 Char देता है या उसका ASCII number
+
+```js
+'JavaScript'.charAt(0)       // J
+'JavaScript'.charCodeAt(3)   // 97 (a)
+```
+
+---
+
+## 🟩 9. `indexOf()` / `lastIndexOf()`
+
+🔹 First ya last matching index देता है। नहीं मिला तो -1
+
+```js
+'I love JS'.indexOf('love')        // 2
+'I love JS. JS is cool'.lastIndexOf('JS') // 10
+```
+
+---
+
+## 🟩 10. `concat()`
+
+🔹 Strings को जोड़ता है।
+
+```js
+'30'.concat('Days','Of','JS')  // 30DaysOfJS
+```
+
+---
+
+## 🟩 11. `startsWith()` / `endsWith()`
+
+🔹 String की शुरुआत या अंत को check करता है।
+
+```js
+'Finland'.startsWith('Fin')   // true
+'Finland'.endsWith('land')    // true
+```
+
+---
+
+## 🟩 12. `search()`
+
+🔹 Index return करता है match का (string ya regex)
+
+```js
+'I love JS'.search('love')    // 2
+```
+
+---
+
+## 🟩 13. `match()`
+
+🔹 Substring matches को array में return करता है
+
+```js
+'JS is fun'.match(/js/gi) // ['JS']
+```
+
+---
+
+## 🟩 14. `repeat(n)`
+
+🔹 String को n बार दोहराता है।
+
+```js
+'love'.repeat(3) // lovelovelove
+```
+
+---
+
+## 🎁 Bonus – Digits निकालना:
+
+```js
+let txt = 'In 2020, I ran 30 Days'
+txt.match(/\d+/g)  // ['2020', '30']
+```
+
+---
+
+### 📄 Ready to Download?
+
+PDF version chahiye to bataiye – turant bana ke de dunga.
+
+Next: `padStart`, `padEnd`, `localeCompare` etc. bhi chahiye kya?
+Function	Use
+typeof	Data type check
+parseInt()	String/Float ➜ Integer
+parseFloat()	String ➜ Float
+Number()	String ➜ Number (int or float)
++value	Quick convert to Number

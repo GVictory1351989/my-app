@@ -11,17 +11,26 @@ function App() {
             path: "/Tutorials/Tutorial2/index.html", // ✅ CORRECT path now
         },
         {
-            name: "Tutorial 3",
+            name: "JavaScript Date ",
             path: "/Tutorials/Tutorial3/index.html", // ✅ CORRECT path now
         },
         {
-            name: "Tutorial 4",
+            name: "JavaScript Array",
             path: "/Tutorials/Tutorial4/index.html", // ✅ CORRECT path now
         },
         {
-            name: "Tutorial 5",
+            name: "JavaScript Functions",
             path: "/Tutorials/Tutorial5/index.html", // ✅ CORRECT path now
-        }
+        },
+        {
+            name: "JavaScript Object",
+            path: "/Tutorials/Tutorial6/index.html", // ✅ CORRECT path now
+        },
+        {
+            name: "Higher Order Functions",
+            path: "/Tutorials/Tutorial7/index.html", // ✅ CORRECT path now
+        },
+        
     ];
 
     return (
