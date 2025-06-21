@@ -16,6 +16,13 @@ class ClassExample extends Component {
 function ReactComponentTypes() {
     return (
         <div className="p-6 space-y-6 bg-white rounded-lg shadow max-w-3xl mx-auto">
+            {/* Back link */}
+            <Link
+                to="/"
+                className="inline-block mt-4 text-sm text-blue-600 hover:underline"
+            >
+                ← Back to Tutorials
+            </Link>
             {/* Title */}
             <h2 className="text-3xl font-bold text-blue-800 border-b pb-2">
                 📚 React Component Types
@@ -82,13 +89,7 @@ function ReactComponentTypes() {
                 </ul>
             </section>
 
-            {/* Back link */}
-            <Link
-                to="/"
-                className="inline-block mt-4 text-sm text-blue-600 hover:underline"
-            >
-                ← Back to Tutorials
-            </Link>
+           
         </div>
     );
 }

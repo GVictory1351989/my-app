@@ -164,6 +164,11 @@ aur update ke liye this.setState() ka use hota hai, jo component ko re-render ka
 	};
 	return (
 		<div className="p-6">
+			<div className="mt-6">
+				<Link to="/" className="text-sm text-blue-600 hover:underline">
+					← Back to Tutorials
+				</Link>
+			</div>
 			<h2 className="text-2xl font-bold mb-6">⚛️ React Counter Examples</h2>
 			<pre style={preStyle}>
 				<code>{stateExplanation}</code>
@@ -173,12 +178,7 @@ aur update ke liye this.setState() ka use hota hai, jo component ko re-render ka
 
 			{/* Class Component */}
 			<FunctionSetValueClass />
-
-			<div className="mt-6">
-				<Link to="/" className="text-sm text-blue-600 hover:underline">
-					← Back to Tutorials
-				</Link>
-			</div>
+			
 		</div>
 	);
 }
