@@ -26,8 +26,6 @@ function App() {
                     <li key={index}>
                         <a
                             href={tut.path}
-                            target="_blank"
-                            rel="noopener noreferrer"
                             className="text-blue-600 hover:underline"
                         >
                             {tut.name}

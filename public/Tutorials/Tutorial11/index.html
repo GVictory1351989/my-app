@@ -259,6 +259,165 @@
             onload - when the browser has finished loading a page
         </code>
 </pre>
+    <h2>Closure</h2>
+    <p>JavaScript allows writing function inside an outer function. We can write as many inner functions as we want. If inner function access the variables of outer function then it is called closure.</p>
+    <pre>
+      <code>
+    function outerFunction() {
+    let count = 0;
+    function plusOne() {
+    count++
+    return count
+    }
+    function minusOne() {
+    count--
+    return count
+    }
+
+    return {
+    plusOne:plusOne(),
+    minusOne:minusOne()
+    }
+    }
+    const innerFuncs = outerFunction()
+
+    console.log(innerFuncs.plusOne)
+    console.log(innerFuncs.minusOne)
+    </code>
+</pre>
+    <h2>
+        Coding standards
+    </h2>
+    <pre><code>
+    Coding conventions helps:
+
+    to write clean code
+    to improve code readability
+    to improve code re-useability and maintainability
+    Coding conventions includes
+
+    Naming and declaration rules for variables
+    Naming and declaration rules for functions
+    Rules for the use of white space, indentation, and comments
+    Programming practices and principles
+    Conventions use in 30DaysOfJavaScript
+    In this challenge we follow the regular JavaScript convention but I added also my preference of writing.
+
+    We used camelCase for variables and functions.
+    All variable names start with a letter.
+    We chose to use const for constants, arrays, objects and functions. In stead of double quote, we chose to use single quote or backtick. Single quote is becoming trendy.
+    We also removed semicolons from our code but it is a matter of personal preference.
+    Space around arithmetic operators, assignment operators and after comma
+    Arrow function instead of function declaration
+    Explicit return instead of implicit return if the function is one liner
+    No trailing comma in the last value of an object
+    We prefer this +=, -=, *= /=, **= instead of the longer version
+    When we use console.log() it is good to print with a tag string to identify from where the console is coming
+</code></pre>
+    <h2>Document Object Model (DOM)</h2>
+    <pre><code>
+    getElementsByTagName():takes a tag name as a string parameter and this method returns an HTMLCollection object.
+    document.getElementsByTagName('tagname')
+
+    const allTitles = document.getElementsByTagName('h1')
+
+    console.log(allTitles) //HTMLCollections
+    console.log(allTitles.length) // 4
+
+    for (let i = 0; i < allTitles.length; i++) {
+    console.log(allTitles[i]) // prints each elements in the HTMLCollection
+    }
+    . getElementsByClassName() method returns an HTMLCollection object.
+    . getElementsById() targets a single HTML element. We pass the id without # as an argument.
+    . The document.querySelector method can select an HTML or HTML elements by tag name, by id or by class name.
+
+    let firstTitle = document.querySelector('h1') // select the first available h1 element
+    let firstTitle = document.querySelector('#first-title') // select id with first-title
+    let firstTitle = document.querySelector('.title') // select the first available element with class title
+
+    querySelectorAll: can be used to select html elements by its tag name or class. It returns a nodeList
+    which is an array like object which supports array methods.
+
+    const allTitles = document.querySelectorAll('h1') # selects all the available h1 elements in the page
+
+    console.log(allTitles.length) // 4
+    for (let i = 0; i < allTitles.length; i++) {
+    console.log(allTitles[i])
+    }
+
+    allTitles.forEach(title => console.log(title))
+    const allTitles = document.querySelectorAll('.title') // the same goes for selecting using class
+
+    Adding attribute
+    An attribute is added in the opening tag of HTML which gives
+    additional information about the element.
+
+    const titles = document.querySelectorAll('h1')
+    titles[3].className = 'title'
+    titles[3].id = 'fourth-title'
+
+    The setAttribute() method set any html attribute.
+
+    const titles = document.querySelectorAll('h1')
+    titles[3].setAttribute('class', 'title')
+    titles[3].setAttribute('id', 'fourth-title')
+
+    Adding class using classList
+    The class list method is a good method to append additional class.
+
+    Removing class using remove
+    titles[3].classList.remove('title', 'header-title')
+
+    . Adding Text content using textContent
+
+    const titles = document.querySelectorAll('h1')
+    titles[3].textContent = 'Fourth Title'
+
+    Adding Text Content using innerHTML
+    Most people get confused between textContent and innerHTML.
+    textContent is meant to add text to an HTML element,
+    however innerHTML can add a text or HTML element or elements as a child.
+
+    const titles = document.querySelectorAll('h1')
+    titles[3].textContent = 'Fourth Title'
+
+    Adding Style Color
+
+    const titles = document.querySelectorAll('h1')
+    titles.forEach((title, i) => {
+    title.style.fontSize = '24px' // all titles will have 24px font size
+    if (i % 2 === 0) {
+    title.style.color = 'green'
+    } else {
+    title.style.color = 'red'
+    }
+    })
+
+    Adding Style Background Color
+
+    const titles = document.querySelectorAll('h1')
+    titles.forEach((title, i) => {
+    title.style.fontSize = '24px' // all titles will have 24px font size
+    if (i % 2 === 0) {
+    title.style.backgroundColor = 'green'
+    } else {
+    title.style.backgroundColor = 'red'
+    }
+    })
+
+    Adding Style Font Size
+
+    const titles = document.querySelectorAll('h1')
+    titles.forEach((title, i) => {
+    title.style.fontSize = '24px' // all titles will have 24px font size
+    if (i % 2 === 0) {
+    title.style.fontSize = '20px'
+    } else {
+    title.style.fontSize = '30px'
+    }
+    })
+
+</code></pre>
             <!-- 🔹 Callback Section -->
             <div class="section">
                 <h2>🔁 1. Callback Function</h2>
