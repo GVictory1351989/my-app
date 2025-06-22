@@ -11,6 +11,10 @@ function App() {
         { name: "JavaScript Functions", path: "/Tutorials/Tutorial5/index.html" },
         { name: "JavaScript Object", path: "/Tutorials/Tutorial6/index.html" },
         { name: "Higher Order Functions", path: "/Tutorials/Tutorial7/index.html" },
+        { name: "Sets and Maps", path: "/Tutorials/Tutorial8/index.html" },
+        { name: "Destructuring and Spreading and json", path: "/Tutorials/Tutorial9/index.html" },
+        { name: "HTML5 Web Storage", path: "/Tutorials/Tutorial10/index.html" },
+        { name: "Promise & Callback", path: "/Tutorials/Tutorial11/index.html" },
     ];
 
     // ✅ Main Tutorial Page

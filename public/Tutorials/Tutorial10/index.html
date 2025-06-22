@@ -1,0 +1,155 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Web Storage Tutorial</title>
+</head>
+<body>
+    <h2>🌐 Web Storage: localStorage vs sessionStorage</h2>
+
+    <p><strong>✅ What is Web Storage?</strong></p>
+    <ul>
+        <li><code>localStorage</code> stores data with no expiration date</li>
+        <li><code>sessionStorage</code> stores data for the current tab session only</li>
+    </ul>
+
+    <hr />
+
+    <h3>📦 Storing Data</h3>
+    <pre><code>// String
+localStorage.setItem('firstName', 'Asabeneh');
+
+// Number
+localStorage.setItem('age', 200);
+
+// Array
+const skills = ['HTML', 'CSS', 'JS', 'React'];
+localStorage.setItem('skills', JSON.stringify(skills));
+
+// Object
+const user = {
+  firstName: 'Asabeneh',
+  age: 250,
+  skills: ['HTML', 'CSS', 'JS', 'React']
+};
+localStorage.setItem('user', JSON.stringify(user));
+</code></pre>
+
+    <button onclick="storeData()">📥 Store Data</button>
+
+    <script>
+        function storeData() {
+            localStorage.setItem('firstName', 'Asabeneh');
+            localStorage.setItem('age', 200);
+            const skills = ['HTML', 'CSS', 'JS', 'React'];
+            localStorage.setItem('skills', JSON.stringify(skills));
+
+            const user = {
+                firstName: 'Asabeneh',
+                age: 250,
+                skills: ['HTML', 'CSS', 'JS', 'React']
+            };
+            localStorage.setItem('user', JSON.stringify(user));
+
+            alert("✅ Data stored in localStorage");
+        }
+    </script>
+
+    <hr />
+
+    <h3>📤 Getting Data</h3>
+    <pre><code>let firstName = localStorage.getItem('firstName');
+let age = localStorage.getItem('age');
+let skills = JSON.parse(localStorage.getItem('skills'));
+let user = JSON.parse(localStorage.getItem('user'));
+
+console.log(firstName, age, skills, user);
+</code></pre>
+
+    <button onclick="getData()">📤 Get Data</button>
+    <p id="output"></p>
+
+    <script>
+        function getData() {
+            const name = localStorage.getItem('firstName');
+            const age = localStorage.getItem('age');
+            const skills = JSON.parse(localStorage.getItem('skills'));
+            const user = JSON.parse(localStorage.getItem('user'));
+
+            document.getElementById("output").innerText =
+                `👤 Name: ${name}\n📅 Age: ${age}\n🧠 Skills: ${skills.join(', ')}\n👨‍💻 User: ${user.firstName}, Age: ${user.age}`;
+        }
+    </script>
+
+    <hr />
+
+    <h3>❌ Remove Item or Clear All</h3>
+    <pre><code>localStorage.removeItem('age');
+localStorage.clear(); // removes everything!
+</code></pre>
+
+    <button onclick="removeAge()">🧹 Remove 'age'</button>
+    <button onclick="clearAll()">🗑️ Clear All</button>
+
+    <script>
+        function removeAge() {
+            localStorage.removeItem('age');
+            alert("Removed 'age'");
+        }
+
+        function clearAll() {
+            localStorage.clear();
+            alert("🧹 localStorage cleared");
+        }
+    </script>
+
+    <hr />
+
+    <h3>🧪 sessionStorage Example</h3>
+    <pre><code>sessionStorage.setItem('sessionName', 'Temporary Name');
+sessionStorage.getItem('sessionName');
+</code></pre>
+
+    <button onclick="useSessionStorage()">📄 Use sessionStorage</button>
+    <script>
+        function useSessionStorage() {
+            sessionStorage.setItem('sessionName', 'Temporary User');
+            alert("📦 Session data saved");
+
+            const sName = sessionStorage.getItem('sessionName');
+            console.log("Session Name:", sName);
+        }
+    </script>
+
+    <hr />
+
+    <h3>🔍 How to View Stored Data in Browser</h3>
+    <ol>
+        <li>Open DevTools (Right Click → Inspect)</li>
+        <li>Go to <strong>Application</strong> Tab</li>
+        <li>Check <strong>Local Storage</strong> and <strong>Session Storage</strong></li>
+    </ol>
+
+    <h3>🧠 Diagram</h3>
+    <pre>
++-------------------------+          +-------------------------+
+|  Your Web Application   |  ----->  |     localStorage        |
++-------------------------+          |-------------------------|
+                                     | 'firstName': 'Asabeneh'|
+                                     | 'age': '200'            |
+                                     | 'skills': [...]         |
+                                     +-------------------------+
+
+🔁 Remains after browser/tab close
+
++-------------------------+          +--------------------------+
+|  Tab Session            |  ----->  |     sessionStorage       |
++-------------------------+          |--------------------------|
+                                     | 'sessionName': 'Temp'    |
+                                     +--------------------------+
+
+❌ Cleared on tab close
+  </pre>
+
+</body>
+</html>

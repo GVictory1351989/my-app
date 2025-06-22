@@ -1,0 +1,333 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>JS Callback, Promise, Async/Await Tutorial</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 30px;
+            background-color: #f4f6f8;
+        }
+
+        h1, h2 {
+            color: #005f99;
+        }
+
+        .section {
+            margin-bottom: 40px;
+            padding: 15px;
+            border: 2px dashed #ccc;
+            border-radius: 10px;
+            background-color: #fff;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 8px 15px;
+            background-color: #007acc;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .output {
+            margin-top: 10px;
+            background: #f1f1f1;
+            padding: 10px;
+            border-left: 4px solid #007acc;
+            white-space: pre-line;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>📘 JavaScript Callback, Promise, Fetch, Async/Await</h1>
+    <h2>Promise</h2>
+    <p>
+        A Promise is a way to handle asynchronous operations in JavaScript. It allows handlers with an asynchronous action's eventual success value or failure reason. This lets asynchronous methods return values like synchronous methods: instead of immediately returning the final value, the asynchronous method returns a promise to supply the value at some point in the future.
+        A Promise is in one of these states:
+        <ul>
+       <li> pending: initial state, neither fulfilled nor rejected.</li>
+       <li> fulfilled: meaning that the operation completed successfully.</li>
+       <li> rejected: meaning that the operation failed.</li>
+       </ul>
+        <h2>Callbacks</h2>
+    <p>call back Let us see a callback function which can take two parameters. The first parameter is err and the second is result. If the err parameter is false, there will not be error other wise it will return an error.</p>
+    <pre>
+        <code>
+            //In this case the err has a value and it will return the err block.
+            //Callback
+            const doSomething = callback => {
+            setTimeout(() => {
+            const skills = ['HTML', 'CSS', 'JS']
+            callback('It did not go well', skills)
+            }, 2000)
+            }
+
+            const callback = (err, result) => {
+            if (err) {
+            return console.log(err)
+            }
+            return console.log(result)
+            }
+
+            doSomething(callback)
+
+            // after 2 seconds it will print
+            It did not go well
+
+
+            //In this case the err is false and it will return the else block which is the result.
+
+            const doSomething = callback => {
+            setTimeout(() => {
+            const skills = ['HTML', 'CSS', 'JS']
+            callback(false, skills)
+            }, 2000)
+            }
+
+            doSomething((err, result) => {
+            if (err) {
+            return console.log(err)
+            }
+            return console.log(result)
+            })
+
+            // after 2 seconds it will print the skills
+            ["HTML", "CSS", "JS"]
+        </code>  
+   </pre>
+    <h2>Promise constructor</h2>
+    <p>We can create a promise using the Promise constructor. We can create a new promise using the key word new followed by the word Promise and followed by a parenthesis. Inside the parenthesis, it takes a callback function. The promise callback function has two parameters which are the resolve and reject functions.</p>
+    <pre>
+        <code>
+            // syntax
+            const promise = new Promise((resolve, reject) => {
+            resolve('success')
+            reject('failure')
+            })
+
+            // Promise
+            const doPromise = new Promise((resolve, reject) => {
+            setTimeout(() => {
+            const skills = ['HTML', 'CSS', 'JS']
+            if (skills.length > 0) {
+            resolve(skills)
+            } else {
+            reject('Something wrong has happened')
+            }
+            }, 2000)
+            })
+
+            doPromise
+            .then(result => {
+            console.log(result)
+            })
+            .catch(error => console.log(error))
+
+            //["HTML", "CSS", "JS"]
+
+            // Promise
+            const doPromise = new Promise((resolve, reject) => {
+            setTimeout(() => {
+            const skills = ['HTML', 'CSS', 'JS']
+            if (skills.includes('Node')) {
+            resolve('fullstack developer')
+            } else {
+            reject('Something wrong has happened')
+            }
+            }, 2000)
+            })
+
+            doPromise
+            .then(result => {
+            console.log(result)
+            })
+            .catch(error => console.error(error))
+
+            //Something wrong has happened
+
+        </code>
+    </pre>
+
+    <h2>Fetch API</h2>
+    <p>The Fetch API provides an interface for fetching resources (including across the network). It will seem familiar to anyone who has used XMLHttpRequest, but the new API provides a more powerful and flexible feature set. In this challenge we will use fetch to request url and APIS. In addition to that let us see demonstrate use case of promises in accessing network resources using the fetch API.</p>
+    <pre><code>
+    const url = 'https://restcountries.com/v2/all' // countries api
+    fetch(url)
+    .then(response => response.json()) // accessing the API data as JSON
+    .then(data => {
+    // getting the data
+    console.log(data)
+    })
+    .catch(error => console.error(error)) // handling error if something wrong happens
+</code></pre>
+    <h2>Async and Await</h2>
+    <p>Async and await is an elegant way to handle promises. </p>
+    <pre>
+        <code>
+            const square = async function (n) { // async added 
+            return n * n
+            }
+
+            square(2)
+
+            //Promise {<resolved>
+    : 4}
+
+
+    const square = async function (n) {
+    return n * n
+    }
+    const value = await square(2)
+    console.log(value)
+
+    Let us fetch API data using both promise method and async and await method.
+
+    .promise
+
+    const url = 'https://restcountries.com/v2/all'
+    fetch(url)
+    .then(response => response.json())
+    .then(data => {
+    console.log(data)
+    })
+    .catch(error => console.error(error))
+
+    .async and await
+
+    const fetchData = async () => {
+    try {
+    const response = await fetch(url)
+    const countries = await response.json()
+    console.log(countries)
+    } catch (err) {
+    console.error(err)
+    }
+    }
+    console.log('===== async and await')
+    fetchData()
+</code>
+    </pre>
+            <!-- 🔹 Callback Section -->
+            <div class="section">
+                <h2>🔁 1. Callback Function</h2>
+                <p><strong>Kya hai?</strong> Callback ek function hota hai jo doosre function ko parameter ke roop mein diya jata hai, taaki jab kaam complete ho tab call ho.</p>
+                <p><strong>Use:</strong> Asynchronous kaam jaise data laana, delay lagana, file read karna.</p>
+                <button onclick="runCallback(true)">Run Callback (Error)</button>
+                <button onclick="runCallback(false)">Run Callback (Success)</button>
+                <div id="callback-output" class="output"></div>
+            </div>
+
+            <!-- 🔹 Promise Section -->
+            <div class="section">
+                <h2>📦 2. Promise</h2>
+                <p><strong>Kya hai?</strong> Promise ek object hai jo future mein success ya error ka result deta hai.</p>
+                <p><strong>Use:</strong> Asynchronous kaam ko chainable aur readable banana.</p>
+                <button onclick="runPromise(true)">Run Promise (Success)</button>
+                <button onclick="runPromise(false)">Run Promise (Failure)</button>
+                <div id="promise-output" class="output"></div>
+            </div>
+
+            <!-- 🔹 Fetch with .then -->
+            <div class="section">
+                <h2>🌐 3. Fetch API using .then()</h2>
+                <p><strong>Kya hai?</strong> `fetch()` network se data laane ka tareeka hai. Yeh ek promise return karta hai.</p>
+                <p><strong>Use:</strong> Web API se data fetch karna jaise REST API.</p>
+                <button onclick="fetchWithThen()">Fetch Countries (.then)</button>
+                <div id="fetch-then-output" class="output"></div>
+            </div>
+
+            <!-- 🔹 Async/Await -->
+            <div class="section">
+                <h2>⚡ 4. Async / Await</h2>
+                <p><strong>Kya hai?</strong> `async/await` Promise ko handle karne ka modern aur easy syntax hai.</p>
+                <p><strong>Use:</strong> Readable async code likhne ke liye, `try/catch` ke saath error handle karna.</p>
+                <button onclick="fetchWithAsync()">Fetch Countries (async/await)</button>
+                <div id="fetch-async-output" class="output"></div>
+            </div>
+
+            <!-- JavaScript Code Starts -->
+            <script>
+                // 📍 1. Callback Example
+                function runCallback(isError) {
+                    const output = document.getElementById("callback-output");
+
+                    const doSomething = (callback) => {
+                        setTimeout(() => {
+                            const skills = ['HTML', 'CSS', 'JS'];
+                            if (isError) {
+                                callback("❌ Error: Something went wrong", skills);
+                            } else {
+                                callback(false, skills);
+                            }
+                        }, 1500);
+                    };
+
+                    doSomething((err, result) => {
+                        if (err) {
+                            output.textContent = err;
+                        } else {
+                            output.textContent = "✅ Skills: " + result.join(", ");
+                        }
+                    });
+                }
+
+                // 📍 2. Promise Example
+                function runPromise(isSuccess) {
+                    const output = document.getElementById("promise-output");
+
+                    const doPromise = new Promise((resolve, reject) => {
+                        setTimeout(() => {
+                            const skills = ['HTML', 'CSS', 'JS'];
+                            if (isSuccess) {
+                                resolve(skills);
+                            } else {
+                                reject("❌ Error: Operation failed");
+                            }
+                        }, 1500);
+                    });
+
+                    doPromise
+                        .then(result => {
+                            output.textContent = "✅ Skills: " + result.join(", ");
+                        })
+                        .catch(error => {
+                            output.textContent = error;
+                        });
+                }
+
+                // 📍 3. Fetch using .then
+                function fetchWithThen() {
+                    const output = document.getElementById("fetch-then-output");
+                    const url = 'https://restcountries.com/v2/all';
+
+                    fetch(url)
+                        .then(res => res.json())
+                        .then(data => {
+                            output.textContent = `🌍 Total Countries: ${data.length}\nExample: ${data[0].name}`;
+                        })
+                        .catch(err => {
+                            output.textContent = "❌ Error: " + err;
+                        });
+                }
+
+                // 📍 4. Fetch using async/await
+                async function fetchWithAsync() {
+                    const output = document.getElementById("fetch-async-output");
+                    const url = 'https://restcountries.com/v2/all';
+
+                    try {
+                        const response = await fetch(url);
+                        const data = await response.json();
+                        output.textContent = `🌏 Total Countries: ${data.length}\nExample: ${data[1].name}`;
+                    } catch (error) {
+                        output.textContent = "❌ Error: " + error;
+                    }
+                }
+            </script>
+
+</body>
+</html>
