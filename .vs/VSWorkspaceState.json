@@ -3,7 +3,7 @@
     "",
     "\\public",
     "\\public\\Tutorials",
-    "\\public\\Tutorials\\Tutorial1",
+    "\\public\\Tutorials\\Tutorial11",
     "\\public\\Tutorials\\Tutorial2",
     "\\src",
     "\\src\\reacttutorials",
@@ -11,6 +11,6 @@
     "\\src\\reacttutorials\\functionset",
     "\\src\\reacttutorials\\intro"
   ],
-  "SelectedNode": "\\src\\reacttutorials\\functionset\\functionsetvalue.js",
+  "SelectedNode": "\\public\\Tutorials\\Tutorial11\\index.html",
   "PreviewInSolutionExplorer": false
 }

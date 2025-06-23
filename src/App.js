@@ -2,6 +2,11 @@
 import ReactIntro from './reacttutorials/intro/ReactIntro';
 import ReactComponentTypes from './reacttutorials/component-types/ReactComponentTypes';
 import FunctionSetValue from './reacttutorials/functionset/FunctionSetValue';
+import PassByComponent from './reacttutorials/functionpasscomp/PassByComponent';
+import ChildToParent from './reacttutorials/childtoparent/ChildToParent'
+import ReactEventExamples from './reacttutorials/reacteventexamples/ReactEventExamples'
+import ReactMapKey from './reacttutorials/reactmapkeyindex/ReactMapKey'
+import ReactHookExamples from './reacttutorials/reacthookexample/ReactHookExamples'
 
 function App() {
     const tutorials = [
@@ -49,6 +54,31 @@ function App() {
                         Function and Class Set Value and Initialise
                     </Link>
                 </li>
+                <li>
+                    <Link to="/reacttutorials/PassByComponent" className="text-green-600 hover:underline">
+                        Pass by Component mean Parent to Child
+                    </Link>
+                </li>
+                <li>
+                    <Link to="/reacttutorials/ChildToParent" className="text-green-600 hover:underline">
+                        Child to Parent Pass Value
+                    </Link>
+                </li>
+                <li>
+                    <Link to="/reacttutorials/ReactEventExamples" className="text-green-600 hover:underline">
+                        ReactEventExamples
+                    </Link>
+                </li>
+                <li>
+                    <Link to="/reacttutorials/ReactMapKey" className="text-green-600 hover:underline">
+                        React Map Examples
+                    </Link>
+                </li>
+                <li>
+                    <Link to="/reacttutorials/ReactHookExamples" className="text-green-600 hover:underline">
+                        React Hook Examples
+                    </Link>
+                </li>
             </ul>
         </div>
     );
@@ -63,6 +93,11 @@ function App() {
                 <Route path="/reacttutorials/ReactIntro" element={<ReactIntro />} />
                 <Route path="/reacttutorials/ReactComponentTypes" element={<ReactComponentTypes />} />
                 <Route path="/reacttutorials/FunctionSetValue" element={<FunctionSetValue />} />
+                <Route path="/reacttutorials/PassByComponent" element={<PassByComponent />} />
+                <Route path="/reacttutorials/ChildToParent" element={<ChildToParent />} />
+                <Route path="/reacttutorials/ReactEventExamples" element={<ReactEventExamples />} />
+                <Route path="/reacttutorials/ReactMapKey" element={<ReactMapKey />} />
+                <Route path="/reacttutorials/ReactHookExamples" element={<ReactHookExamples />} />
             </Routes>
         </div>
     );
